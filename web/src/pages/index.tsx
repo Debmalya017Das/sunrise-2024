@@ -10,7 +10,7 @@ export default function Home() {
   }, []);
 
   const initializeTasks = () => {
-    const initializedTasks = [...initialTasks];
+    const initializedTasks = [...initialTasks] ;
     initializedTasks.forEach((task) => {
       task.completed = false;
     });
