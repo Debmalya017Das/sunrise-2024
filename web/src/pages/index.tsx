@@ -21,25 +21,7 @@ export default function Home() {
   const updateTasks = (updatedTasks: Task[]) => {
     setTasks([...updatedTasks]);
   };
-
-  const handleCompleteTask = (taskId: number) => {
-    const activeTasksInOrder = tasks.filter(t => t.active && !t.completed);
-    if (activeTasksInOrder[0].id !== taskId) {
-      return; 
-    }
-
-    const updatedTasks = tasks.map(task => {
-      if (task.id === taskId) {
-        task.completed = true;
-        task.active = false;
-      }
-      return task;
-    });
-
-    updateTasks(updatedTasks);
-  };
-
-  const activateNextTask = (tasks: Task[], completedTaskId: number) => {
+    const activateNextTask = (tasks: Task[], completedTaskId: number) => {
     const completedTask = tasks.find(t => t.id === completedTaskId);
     if (completedTask) {
       const nextTaskInGroup = tasks.find(t => t.group === completedTask.group && !t.completed && !t.active);
@@ -54,6 +36,26 @@ export default function Home() {
       }
     }
   };
+
+  const handleCompleteTask = (taskId: number) => {
+    const activeTasksInOrder = tasks.filter(t => t.active && !t.completed);
+      if (activeTasksInOrder.length === 0 || activeTasksInOrder[0].id !== taskId) {
+        return;
+      }
+      const updatedTasks = tasks.map(task => {
+        if (task.id === taskId) {
+          task.completed = true;
+          task.active = false;
+        }
+        return task;
+      });
+
+      updateTasks(updatedTasks);
+      const inProgressTasks = tasks.filter(t => t.active && !t.completed);
+      if (inProgressTasks.length === 0) {
+        activateNextTask(updatedTasks, taskId);
+      };
+  }
 
   const handleStartTask = (taskId: number) => {
     const updatedTasks = tasks.map(task => {
