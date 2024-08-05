@@ -17,7 +17,7 @@ export function initializeTasks(): void {
 export function getActiveTasks(): Task[] {
   return tasks
     .filter(task => task.active && !task.completed)
-    .map(({ active, ...rest }) => rest as Task); // Omit 'active' property and cast to Task
+    .map(({ active, ...rest }) => rest as Task); 
 }
 
 
@@ -75,6 +75,6 @@ function getActiveGroup(): number {
       return i;
     }
   }
-  return 4; // All groups completed, return the last group
+  return 4; 
 }
 
