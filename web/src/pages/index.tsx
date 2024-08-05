@@ -75,7 +75,7 @@ export default function Home() {
         {title} <span className="text-sm text-gray-500">({tasks.length})</span>
       </h2>
       {tasks.map((task, index) => (
-        <div key={task.id} className="bg-slate-100 border-slate-800 shadow-lg rounded-lg p-4 mb-4">
+        <div key={task.id} className="bg-amber-50 border-slate-800 hover:scale-105 duration-300 shadow-lg rounded-lg p-4 mb-4">
           <h3 className="text-lg font-semibold mb-2">{task.title}</h3>
           <p className="text-gray-600 mb-4">{task.description}</p>
           {renderActionButton(task, index === 0)}
@@ -97,7 +97,7 @@ export default function Home() {
                disabled={!isFirst}
               className={`font-bold py-2 px-4 rounded ${
                 isFirst 
-                  ? 'bg-blue-500 hover:bg-blue-600 text-white' 
+                  ? 'bg-blue-800 hover:bg-blue-950 text-white' 
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
@@ -110,7 +110,7 @@ export default function Home() {
               disabled={!isFirst}
               className={`font-bold py-2 px-4 rounded ${
                 isFirst 
-                  ? 'bg-green-500 hover:bg-green-600 text-white' 
+                  ? 'bg-green-700 hover:bg-green-900 text-white' 
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
