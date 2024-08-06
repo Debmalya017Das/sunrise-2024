@@ -69,27 +69,35 @@ export default function Home() {
     updateTasks(updatedTasks);
   };
 
-  const renderTaskColumn = (title: string, tasks: Task[], renderActionButton: (task: Task, isFirst: boolean) => React.ReactNode) => (
-    <div className="bg-white rounded-lg shadow-md p-4">
-      <h2 className="text-xl font-bold mb-4">
-        {title} <span className="text-sm text-gray-500">({tasks.length})</span>
-      </h2>
+const renderTaskColumn = (title: string, tasks: Task[], renderActionButton: (task: Task, isFirst: boolean) => React.ReactNode) => (
+  <div className="bg-white rounded-lg shadow-md p-4">
+    <h2 className="text-xl font-bold mb-4">
+      {title} <span className="text-sm text-gray-500">({tasks.length})</span>
+    </h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {tasks.map((task, index) => (
-        <div key={task.id} className="bg-amber-50 border-slate-800 hover:scale-105 duration-300 shadow-lg rounded-lg p-4 mb-4">
-          <h3 className="text-lg font-semibold mb-2">{task.title}</h3>
+        <div 
+          key={task.id} 
+          className="bg-amber-50 border border-slate-900 rounded-lg p-4 transition-all duration-300 hover:shadow-lg hover:scale-105"
+        >
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-semibold">Task {task.id}</h3>
+            <span className="text-sm text-gray-500">#{task.id}</span>
+          </div>
+          <h4 className="text-md font-medium mb-2">{task.title}</h4>
           <p className="text-gray-600 mb-4">{task.description}</p>
           {renderActionButton(task, index === 0)}
         </div>
       ))}
     </div>
-  );
-
+  </div>
+);
   return (
     <div className="min-h-screen bg-slate-200">
       <header className="bg-blue-950 text-white py-4 shadow-lg">
         <h1 className="text-3xl font-bold text-center">Task Board</h1>
       </header>
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 bg-gray-100">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {renderTaskColumn('To-Do', tasks.filter(t => !t.active && !t.completed), (task, isFirst) => (
             <button 
